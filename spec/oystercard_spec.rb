@@ -58,5 +58,12 @@ describe Oystercard do
       card.tap_out
       expect(card).not_to be_in_journey
     end
+
+    it 'deducts MIN_FARE on tap_out' do
+      card = Oystercard.new
+      card.top_up(30)
+      card.tap_in
+      expect{card.tap_out}.to change{card.balance}.by(-1)
+    end
   end
 end

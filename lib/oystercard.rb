@@ -28,6 +28,7 @@ attr_reader :balance
   end
 
   def tap_out
+    deduct(MIN_FARE)
     @in_use = false
   end
 
