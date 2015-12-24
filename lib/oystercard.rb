@@ -14,10 +14,6 @@ attr_reader :balance
     @balance += amount
   end
 
-  def deduct(amount)
-    @balance -= amount
-  end
-
   def in_journey?
     @in_use
   end
@@ -40,5 +36,9 @@ attr_reader :balance
 
   def card_below_min_fare?
     @balance < MIN_FARE
+  end
+
+  def deduct(amount)
+    @balance -= amount
   end
 end

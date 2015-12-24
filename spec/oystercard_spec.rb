@@ -21,15 +21,6 @@ describe Oystercard do
     end
   end
 
-  describe '#deduct' do
-
-    it 'reduces funds on a card' do
-      card = Oystercard.new
-      card.top_up(30)
-      expect{card.deduct(20)}.to change{card.balance}.by(-20)
-    end
-  end
-
   describe '#in_journey?' do
     it 'is initially not in a journey' do
       expect(subject).not_to be_in_journey
