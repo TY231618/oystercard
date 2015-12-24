@@ -29,4 +29,29 @@ describe Oystercard do
       expect{card.deduct(20)}.to change{card.balance}.by(-20)
     end
   end
+
+  describe '#in_journey?' do
+    it 'is initially not in a journey' do
+      expect(subject).not_to be_in_journey
+    end
+  end
+
+  describe '#tap_in' do
+    it 'allows user to start journey' do
+      card = Oystercard.new
+      card.top_up(30)
+      card.tap_in
+      expect(card).to be_in_journey
+    end
+  end
+
+  describe '#tap_out' do
+    it 'allows user to end journey' do
+      card = Oystercard.new
+      card.top_up(30)
+      card.tap_in
+      card.tap_out
+      expect(card).not_to be_in_journey
+    end
+  end
 end
