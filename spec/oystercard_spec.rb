@@ -43,6 +43,11 @@ describe Oystercard do
       card.tap_in
       expect(card).to be_in_journey
     end
+
+    it 'prevents user starting journey with balance less than £1' do
+      card = Oystercard.new
+      expect {card.tap_in}.to raise_error 'Not enough money on card: please top up'
+    end
   end
 
   describe '#tap_out' do

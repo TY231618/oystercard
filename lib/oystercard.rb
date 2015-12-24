@@ -1,6 +1,7 @@
 class Oystercard
 
 MAX_BALANCE = 99
+MIN_FARE = 1
 attr_reader :balance
 
   def initialize
@@ -20,8 +21,9 @@ attr_reader :balance
   def in_journey?
     @in_use
   end
-  
+
   def tap_in
+    fail 'Not enough money on card: please top up' if card_below_min_fare?
     @in_use = true
   end
 
@@ -33,5 +35,9 @@ attr_reader :balance
 
   def card_maxed_out?(amount)
     @balance + amount > MAX_BALANCE
+  end
+
+  def card_below_min_fare?
+    @balance < MIN_FARE
   end
 end
