@@ -26,12 +26,6 @@ describe Oystercard do
     it 'prevents user starting journey with balance less than £1' do
       expect {oystercard.tap_in(entry_station)}.to raise_error 'Not enough money on card: please top up'
     end
-
-    it 'stores entry station' do
-      oystercard.top_up(30)
-      oystercard.tap_in(entry_station)
-      expect(oystercard.entry_station).to eq entry_station
-    end
   end
 
   describe '#tap_out' do
@@ -39,13 +33,6 @@ describe Oystercard do
       oystercard.top_up(30)
       oystercard.tap_in(entry_station)
       expect{oystercard.tap_out(exit_station)}.to change{oystercard.balance}.by(-1)
-    end
-
-    it 'stores exit station' do
-      oystercard.top_up(30)
-      oystercard.tap_in(entry_station)
-      oystercard.tap_out(exit_station)
-      expect(oystercard.exit_station).to eq exit_station
     end
   end
 
