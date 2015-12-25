@@ -22,19 +22,7 @@ describe Oystercard do
     end
   end
 
-  describe '#in_journey?' do
-    it 'is initially not in a journey' do
-      expect(oystercard).not_to be_in_journey
-    end
-  end
-
   describe '#tap_in' do
-    it 'allows user to start journey' do
-      oystercard.top_up(30)
-      oystercard.tap_in(entry_station)
-      expect(oystercard).to be_in_journey
-    end
-
     it 'prevents user starting journey with balance less than £1' do
       expect {oystercard.tap_in(entry_station)}.to raise_error 'Not enough money on card: please top up'
     end
@@ -47,14 +35,6 @@ describe Oystercard do
   end
 
   describe '#tap_out' do
-    it 'allows user to end journey' do
-      oystercard.top_up(30)
-      oystercard.tap_in(entry_station)
-      oystercard.tap_out(exit_station)
-      expect(oystercard.exit_station).to eq exit_station
-      #expect(card).not_to be_in_journey
-    end
-
     it 'deducts MIN_FARE on tap_out' do
       oystercard.top_up(30)
       oystercard.tap_in(entry_station)
@@ -74,7 +54,7 @@ describe Oystercard do
       oystercard.top_up(30)
       oystercard.tap_in(entry_station)
       oystercard.tap_out(exit_station)
-      expect(oystercard.journey_history).to eq [entry_station, exit_station]
+      expect(oystercard.journey_history).to eq [[entry_station, exit_station]]
     end
   end
 end
